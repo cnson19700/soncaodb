@@ -6,9 +6,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/github.com/soncaodb/config"
-	"github.com/phamtrung99/gopkg/logger"
-	"github.com/phamtrung99/gopkg/utils"
+	"github.com/cnson19700/pkg/logger"
+	"github.com/cnson19700/pkg/utils"
+	"github.com/soncaodb/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/plugin/dbresolver"
@@ -97,7 +97,7 @@ func GetClient(ctx context.Context) *gorm.DB {
 	// use transaction per request
 	if utils.IsEnableTx(ctx) {
 		tx := utils.GetTx(ctx)
-
+		
 		return tx
 	}
 
