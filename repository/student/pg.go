@@ -44,8 +44,6 @@ func (r *pgRepository) GetAll(ctx context.Context) ([]model.Student, error) {
 func (r *pgRepository) Delete(ctx context.Context, ID int64) error {
 	db := r.getClient(ctx)
 	err := db.Where("id = ?", ID).Delete(&model.Student{}).Error
-	
-
 
 	if err != nil {
 		log.Fatal(err)
@@ -78,4 +76,17 @@ func (r *pgRepository) ShowStudent(ctx context.Context, st []model.Student) {
 		fmt.Printf("\t%.2f\t%.2f\t%.2f", st[i].MathSco, st[i].PhysicSco, st[i].ChemiSco)
 	}
 	fmt.Print("\n--------------------------------------------------------\n")
+}
+
+func (r *pgRepository) FindStudent(ctx context.Context, text string) (*model.Student, error) {
+	db := r.getClient(ctx)
+	student := &model.Student{}
+
+	err := db.Where("name = ?", text).First(&student).Error
+
+	if err != nil {
+		return nil, errors.Wrap(err, "get user by email")
+	}
+
+	return student, nil
 }

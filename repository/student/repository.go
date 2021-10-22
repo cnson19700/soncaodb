@@ -11,6 +11,7 @@ type Repository interface {
 	GetAll(ctx context.Context) ([]model.Student, error)
 	Delete(ctx context.Context, ID int64) error
 	Create(ctx context.Context, student *model.Student) (*model.Student, error)
-	ShowStudent(ctx context.Context, st[]model.Student)
+	ShowStudent(ctx context.Context, st []model.Student)
 	Update(ctx context.Context, student *model.Student) (*model.Student, error)
+	FindStudent(ctx context.Context, text string) (*model.Student, error)
 }
