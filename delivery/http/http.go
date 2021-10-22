@@ -3,16 +3,17 @@ package http
 import (
 	"strings"
 
+	"github.com/cnson19700/pkg/middleware"
 	"github.com/labstack/echo/v4"
 	"github.com/phamtrung99/gopkg/middleware"
-	"github.com/phamtrung99/gowebbasic/config"
-	"github.com/phamtrung99/gowebbasic/delivery/http/v1/auth"
-	"github.com/phamtrung99/gowebbasic/delivery/http/v1/comment"
-	"github.com/phamtrung99/gowebbasic/delivery/http/v1/movie"
-	"github.com/phamtrung99/gowebbasic/delivery/http/v1/user"
-	"github.com/phamtrung99/gowebbasic/delivery/http/v1/userfavorite"
-	"github.com/phamtrung99/gowebbasic/repository"
-	"github.com/phamtrung99/gowebbasic/usecase"
+	"github.com/soncaodb/config"
+	"github.com/soncaodb/delivery/http/v1/auth"
+	"github.com/soncaodb/delivery/http/v1/comment"
+	"github.com/soncaodb/delivery/http/v1/movie"
+	"github.com/soncaodb/delivery/http/v1/user"
+	"github.com/soncaodb/delivery/http/v1/userfavorite"
+	"github.com/soncaodb/repository"
+	"github.com/soncaodb/usecase"
 )
 
 // NewHTTPHandler .
