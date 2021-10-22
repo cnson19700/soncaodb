@@ -3,12 +3,12 @@ package repository
 import (
 	"context"
 
-	"github.com/soncaodb/repository/student"
+	"github.com/soncaodb/repository/user"
 	"gorm.io/gorm"
 )
 
 type Repository struct {
-	Student student.Repository
+	User user.Repository
 }
 
 func New(
@@ -16,6 +16,6 @@ func New(
 	// getRedisClient func(ctx context.Context) *redis.Client,
 ) *Repository {
 	return &Repository{
-		Student: student.NewPGRepository(getSQLClient),
+		User: user.NewPGRepository(getSQLClient),
 	}
 }
