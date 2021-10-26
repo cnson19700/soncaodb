@@ -5,13 +5,13 @@ import (
 
 	"github.com/cnson19700/pkg/middleware"
 	"github.com/labstack/echo/v4"
-	"github.com/phamtrung99/gopkg/middleware"
 	"github.com/soncaodb/config"
 	"github.com/soncaodb/delivery/http/v1/auth"
-	"github.com/soncaodb/delivery/http/v1/comment"
-	"github.com/soncaodb/delivery/http/v1/movie"
-	"github.com/soncaodb/delivery/http/v1/user"
-	"github.com/soncaodb/delivery/http/v1/userfavorite"
+
+	//"github.com/soncaodb/delivery/http/v1/comment"
+	//"github.com/soncaodb/delivery/http/v1/movie"
+	//"github.com/soncaodb/delivery/http/v1/user"
+	//"github.com/soncaodb/delivery/http/v1/userfavorite"
 	"github.com/soncaodb/repository"
 	"github.com/soncaodb/usecase"
 )
@@ -60,10 +60,10 @@ func NewHTTPHandler(repo *repository.Repository, ucase *usecase.UseCase) *echo.E
 	apiV1 := e.Group("/v1")
 
 	auth.Init(apiV1.Group("/auth"), ucase)
-	user.Init(apiV1.Group("/users"), ucase)
-	userfavorite.Init(apiV1.Group("/favorites"), ucase)
-	comment.Init(apiV1.Group("/comments"), ucase)
-	movie.Init(apiV1.Group("/movies"), ucase)
+	// user.Init(apiV1.Group("/users"), ucase)
+	// userfavorite.Init(apiV1.Group("/favorites"), ucase)
+	// comment.Init(apiV1.Group("/comments"), ucase)
+	// movie.Init(apiV1.Group("/movies"), ucase)
 
 	return e
 }

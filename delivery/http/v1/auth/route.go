@@ -14,4 +14,6 @@ func Init(group *echo.Group, useCase *usecase.UseCase) {
 	r := &Route{
 		authUseCase: useCase.Auth,
 	}
+
+	group.POST("/register", r.Register)
 }

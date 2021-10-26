@@ -1,7 +1,9 @@
 package auth
 
 import (
+	"html"
 	"net/mail"
+	"strings"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -19,6 +21,11 @@ func VerifyPassword(password, hash string) bool {
 }
 
 func ValidEmail(email string) bool {
-	_, err := mail.ParseAddress(email) 
+	_, err := mail.ParseAddress(email)
 	return err == nil
+}
+
+func Santize(data string) string {
+	data = html.EscapeString(strings.TrimSpace(data))
+	return data
 }

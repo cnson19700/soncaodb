@@ -64,19 +64,13 @@ func CheckFormatValue(formAtributeName string, value string) (bool, string) {
 			return false, formAtributeName + appErr.QueryMsg.WrongFomat
 		}
 		return true, str
-	case "is_adult":
-		num, err := strconv.Atoi(value)
-		if err != nil || num < 0 || num > 1 {
-			return false, appErr.QueryMsg.IsAdultWrong
-		}
-		return true, value
 	case "min_rating":
 		num, err := strconv.Atoi(value)
 		if err != nil || num < 0 || num > 10 {
 			return false, appErr.QueryMsg.MinRatingWrong
 		}
 		return true, value
-	case "cate_id", "actor_id", "movie_id", "duration", "parent_id":
+	case "cate_id", "author_id", "book_id", "parent_id":
 		_, err := strconv.Atoi(value)
 		if err != nil {
 			return false, formAtributeName + appErr.QueryMsg.MustBeNumber
@@ -88,13 +82,7 @@ func CheckFormatValue(formAtributeName string, value string) (bool, string) {
 			return false, formAtributeName + appErr.QueryMsg.WrongFomat
 		}
 		return true, str
-	case "popularity":
-		_, err := strconv.ParseFloat(value, 64)
-		if err != nil {
-			return false, formAtributeName + appErr.QueryMsg.MustBeNumber
-		}
-		return true, value
-	case "release_date":
+	case "release_date": //dung rfc339 check o delivery
 		//str := namestand.IsDate(value)
 		// if str == "" {
 		// 	return false, formAtributeName + appErr.QueryMsg.WrongFomat

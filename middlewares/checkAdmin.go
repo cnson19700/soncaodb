@@ -12,7 +12,6 @@ func CheckAdmin(next echo.HandlerFunc) echo.HandlerFunc {
 		user := c.Get("user").(*jwt.Token)
 		claims := user.Claims.(*JwtCustomClaims)
 		role := claims.UserInfo.Role
-		
 
 		if role == "admin" {
 			return next(c)

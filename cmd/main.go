@@ -7,6 +7,7 @@ import (
 
 	"github.com/soncaodb/client/mysql"
 	"github.com/soncaodb/config"
+	"github.com/soncaodb/usecase"
 
 	serviceHttp "github.com/soncaodb/delivery/http"
 	"github.com/soncaodb/migration"
