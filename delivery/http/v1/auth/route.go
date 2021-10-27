@@ -16,4 +16,5 @@ func Init(group *echo.Group, useCase *usecase.UseCase) {
 	}
 
 	group.POST("/register", r.Register)
+	//group.POST("/login", r.Login)
 }
