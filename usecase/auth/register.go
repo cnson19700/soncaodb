@@ -25,13 +25,13 @@ func (u *Usecase) Register(ctx context.Context, req RegisterRequest) (*model.Use
 	}
 
 	//password format error
-	isPass, password := checkform.CheckFormatValue("password", req.Email)
+	isPass, password := checkform.CheckFormatValue("password", req.Password)
 	if !isPass {
 		return &model.User{}, myerror.ErrEmailFormat(nil)
 	}
 
 	//password format error
-	isFullName, fullname := checkform.CheckFormatValue("full_name", req.Email)
+	isFullName, fullname := checkform.CheckFormatValue("full_name", req.FullName)
 	if !isFullName {
 		return &model.User{}, myerror.ErrEmailFormat(nil)
 	}

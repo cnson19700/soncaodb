@@ -12,4 +12,6 @@ type Repository interface {
 	Delete(ctx context.Context, ID int64) error
 	Create(ctx context.Context, user *model.User) (*model.User, error)
 	Update(ctx context.Context, user *model.User) (*model.User, error)
+	GetEmail(ctx context.Context, email string) (*model.User, error)
+	UpdatePassword(Ctx context.Context, passwordHash string, ID int64) error
 }

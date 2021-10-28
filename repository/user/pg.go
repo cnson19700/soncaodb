@@ -65,3 +65,29 @@ func (r *pgRepository) Update(ctx context.Context, user *model.User) (*model.Use
 
 	return user, errors.Wrap(err, "update user")
 }
+
+func (r *pgRepository) GetEmail(ctx context.Context, email string) (*model.User, error) {
+	db := r.getClient(ctx)
+	user := &model.User{}
+
+	err := db.Where("email = ?", email).
+		First(user).Error
+
+	if err != nil {
+		return nil, errors.Wrap(err, "get user by email")
+	}
+
+	return user, nil
+}
+
+func (r *pgRepository) UpdatePassword(ctx context.Context, passwordHash string, ID int64) error {
+	db := r.getClient(ctx)
+
+	err := db.Where("id= ?", ID).Updates(&model.User{Password: passwordHash}).Error
+
+	if err != nil {
+		return errors.Wrap(err, "update user password")
+	}
+
+	return nil
+}

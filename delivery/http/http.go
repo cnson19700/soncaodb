@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/soncaodb/config"
 	"github.com/soncaodb/delivery/http/v1/auth"
+	"github.com/soncaodb/delivery/http/v1/user"
 
 	//"github.com/soncaodb/delivery/http/v1/comment"
 	//"github.com/soncaodb/delivery/http/v1/movie"
@@ -60,7 +61,7 @@ func NewHTTPHandler(repo *repository.Repository, ucase *usecase.UseCase) *echo.E
 	apiV1 := e.Group("/v1")
 
 	auth.Init(apiV1.Group("/auth"), ucase)
-	// user.Init(apiV1.Group("/users"), ucase)
+	user.Init(apiV1.Group("/users"), ucase)
 	// userfavorite.Init(apiV1.Group("/favorites"), ucase)
 	// comment.Init(apiV1.Group("/comments"), ucase)
 	// movie.Init(apiV1.Group("/movies"), ucase)
