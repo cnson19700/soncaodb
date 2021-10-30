@@ -80,6 +80,19 @@ func (r *pgRepository) GetEmail(ctx context.Context, email string) (*model.User,
 	return user, nil
 }
 
+func (r *pgRepository) CheckEmailExist(ctx context.Context, email string) bool {
+	db := r.getClient(ctx)
+	user := &model.User{}
+
+	err := db.Where("email= ?", email).Find(&user).Error
+
+	if err != nil {
+		return false
+	}
+
+	return true
+}
+
 func (r *pgRepository) UpdatePassword(ctx context.Context, passwordHash string, ID int64) error {
 	db := r.getClient(ctx)
 

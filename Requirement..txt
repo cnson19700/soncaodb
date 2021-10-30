@@ -3,7 +3,6 @@ Chung
 2. Tìm theo tên
 3. lấy danh sách theo category
 
-
 4. lấy danh sách sách đã xem
 5. Bình luận sách
 6. Rating sách

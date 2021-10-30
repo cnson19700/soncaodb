@@ -13,5 +13,6 @@ type Repository interface {
 	Create(ctx context.Context, user *model.User) (*model.User, error)
 	Update(ctx context.Context, user *model.User) (*model.User, error)
 	GetEmail(ctx context.Context, email string) (*model.User, error)
+	CheckEmailExist(ctx context.Context, email string) bool
 	UpdatePassword(Ctx context.Context, passwordHash string, ID int64) error
 }

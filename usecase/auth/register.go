@@ -24,6 +24,10 @@ func (u *Usecase) Register(ctx context.Context, req RegisterRequest) (*model.Use
 		return &model.User{}, myerror.ErrEmailFormat(nil)
 	}
 
+	// if u.userRepo.CheckEmailExist(ctx, email) {
+	// 	return nil, myerror.ErrEmailExist(nil)
+	// }
+
 	//password format error
 	isPass, password := checkform.CheckFormatValue("password", req.Password)
 	if !isPass {

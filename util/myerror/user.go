@@ -55,3 +55,63 @@ func ErrMatchPassword(err error) apperror.AppError {
 		Message:   "2 Password is not match",
 	}
 }
+
+func ErrUpdateUser(err error) apperror.AppError {
+	return apperror.AppError{
+		Raw:       err,
+		ErrorCode: 100070,
+		HTTPCode:  http.StatusNotAcceptable,
+		Info:      "Fail to update User",
+		Message:   "Fail to update USer",
+	}
+}
+
+func ErrAgeFormat(err error) apperror.AppError {
+	return apperror.AppError{
+		Raw:       err,
+		ErrorCode: 30000021,
+		HTTPCode:  http.StatusNotAcceptable,
+		Info:      "age format is wrong",
+		Message:   "age format is wrong.",
+	}
+}
+
+func ErrFileOver5MB(err error) apperror.AppError {
+	return apperror.AppError{
+		Raw:       err,
+		ErrorCode: 30000031,
+		HTTPCode:  http.StatusNotAcceptable,
+		Info:      "File cannot over 5Mb",
+		Message:   "File cannot over 5Mb",
+	}
+}
+
+func ErrOpenFile(err error) apperror.AppError {
+	return apperror.AppError{
+		Raw:       err,
+		ErrorCode: 30000040,
+		HTTPCode:  http.StatusNotAcceptable,
+		Info:      "cannot open file",
+		Message:   "cannot open file",
+	}
+}
+
+func ErrReadBufferFail(err error) apperror.AppError {
+	return apperror.AppError{
+		Raw:       err,
+		ErrorCode: 30000050,
+		HTTPCode:  http.StatusNotAcceptable,
+		Info:      "cannot read buffer of File",
+		Message:   "cannot read buffer of File",
+	}
+}
+
+func ErrNotImageFile(err error) apperror.AppError {
+	return apperror.AppError{
+		Raw:       err,
+		ErrorCode: 30000060,
+		HTTPCode:  http.StatusNotAcceptable,
+		Info:      "not an image file.",
+		Message:   "not an image file.",
+	}
+}
