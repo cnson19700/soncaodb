@@ -68,7 +68,7 @@ func (u *Usecase) UpdateUser(ctx context.Context, req UpdateRequest) (*model.Use
 	if len(req.Form.File["avatar"]) != 0 {
 		file := req.Form.File["avatar"][0]
 		var initAva = "blank.png"
-		var pathFile = "/images/"
+		var pathFile = "/images/avatar"
 
 		fileType, err := imgvalid.CheckImage(file)
 		if err != nil {
