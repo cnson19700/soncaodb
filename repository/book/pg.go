@@ -2,6 +2,7 @@ package book
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/pkg/errors"
 	"github.com/soncaodb/model"
@@ -72,4 +73,71 @@ func (r *pgRepository) GetTitle(ctx context.Context, tile string) (*model.Book, 
 	}
 
 	return book, nil
+}
+
+func (r *pgRepository) SearchBook(ctx context.Context,
+	paginator *model.Paginator,
+	searchText string,
+	filter *model.BookFilter,
+	orders []string) (*model.BookResult, error) {
+	db := r.getClient(ctx)
+	query := db.Model(&model.Book{})
+
+	//Order
+	for _, order := range orders {
+		query.Order(order)
+	}
+
+	filterAuthor := ""
+	filterTitle := ""
+	filterCate := ""
+	filterRate := ""
+
+	if filter.AuthorID != 0 {
+		filterAuthor = "JOIN book_authors ON book_authors.book_id = books.id AND book_authors.author_id = " + strconv.FormatInt(filter.AuthorID, 10)
+	}
+
+	if filter.CateID != 0 {
+		filterCate = "JOIN book_categories ON book_categories.book_id = books.id AND book_categories.category_id = " + strconv.FormatInt(filter.CateID, 10)
+	}
+
+	if filter.MinRating != -1 {
+		filterRate = "AND rating_average > " + strconv.Itoa(filter.MinRating)
+	}
+
+	if searchText != "" {
+		filterTitle = "AND title LIKE " + "'%" + searchText + "%'"
+	}
+
+	queryStr := "SELECT * FROM books" +
+		filterAuthor + " " +
+		filterCate + " WHERE isnull(books.deleted_at) " +
+		filterRate + " " +
+		filterTitle
+
+	//Paging
+	var res model.BookResult
+
+	if paginator.Limit >= 0 {
+		if paginator.Page <= 0 {
+			paginator.Page = 1
+		}
+
+		if paginator.Limit == 0 {
+			paginator.Limit = model.PageSize
+		}
+		res.Page = paginator.Page
+		res.Limit = paginator.Limit
+		query.Count(&res.Total).Scopes(paginator.Paginate())
+	}
+
+	lim := strconv.Itoa(res.Limit)
+	limit := " LIMIT " + lim
+	offsetQuery := strconv.Itoa((res.Page - 1) * res.Limit)
+	offset := " OFFSET " + offsetQuery
+	queryStr += limit + offset
+
+	err := query.Raw(queryStr).Find(&res.Data).Error
+
+	return &res, err
 }

@@ -85,3 +85,15 @@ func ErrReleaseDateFormat(err error) apperror.AppError {
 		Message:   "Release Date format is not valid",
 	}
 }
+
+func ErrSearchTextFormat(err error) apperror.AppError {
+	return apperror.AppError{
+		Raw:       err,
+		ErrorCode: 200070,
+		HTTPCode:  http.StatusNotAcceptable,
+		Info:      "Search book format is not valid",
+		Message:   "Search book format is not valid",
+	}
+}
+
+

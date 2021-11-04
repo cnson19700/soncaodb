@@ -28,15 +28,6 @@ CREATE TABLE `authors` (
 -- +goose StatementEnd
 -- +goose StatementBegin
 
-CREATE TABLE `book_authors` (
-  `id` bigint(20),
-  `book_id` bigint(20),
-  `author_id` bigint(20)
-);
-
--- +goose StatementEnd
--- +goose StatementBegin
-
 CREATE TABLE `categories` (
   `id` bigint(20) PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(128) NOT NULL
@@ -109,18 +100,20 @@ CREATE TABLE `comments` (
 -- +goose StatementEnd
 -- +goose StatementBegin
 
+insert  into `books`(`id`,`author_id`,`publisher_id`,`title`,`language`,`image`,`description`,`release_date`,`rating_average`,`total_page`,`created_at`,`updated_at`,`deleted_at`) values (1,NULL,NULL,'Đắc Nhân Tâm','En','/images/bookImages13.jpeg','Doi xu voi nhau','2021-11-03 07:00:00',4,100,'2021-11-03 08:30:38','2021-11-03 09:01:10',NULL) 
+
+
+-- +goose StatementEnd
+-- +goose StatementBegin
+insert  into `authors`(`id`,`name`,`birth_year`) values (1,'Heeca',1966), (2,'GongCha',1988);
+
+-- +goose StatementEnd
+-- +goose StatementBegin
+
 ALTER TABLE `books` ADD FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`);
 -- +goose StatementEnd
 -- +goose StatementBegin
 ALTER TABLE `books` ADD FOREIGN KEY (`publisher_id`) REFERENCES `publishers` (`id`);
--- +goose StatementEnd
--- +goose StatementBegin
-
-ALTER TABLE `book_authors` ADD FOREIGN KEY (`book_id`) REFERENCES `books` (`id`);
--- +goose StatementEnd
--- +goose StatementBegin
-
-ALTER TABLE `book_authors` ADD FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`);
 -- +goose StatementEnd
 -- +goose StatementBegin
 

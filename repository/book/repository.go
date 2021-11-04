@@ -12,5 +12,9 @@ type Repository interface {
 	Delete(ctx context.Context, ID int64) error
 	Insert(ctx context.Context, user *model.Book) (*model.Book, error)
 	Update(ctx context.Context, user *model.Book) (*model.Book, error)
-	GetTitle(ctx context.Context, title string) (*model.Book, error)
+	SearchBook(ctx context.Context,
+		page *model.Paginator,
+		searchText string,
+		filter *model.BookFilter,
+		orders []string) (*model.BookResult, error)
 }

@@ -8,6 +8,8 @@ import (
 
 type Book struct {
 	ID            int64          `gorm:"column:id;primary_key"  json:"id"`
+	AuthorID      int64          `gorm:"column:author_id" json:"author_id"`
+	PublisherID   int64          `gorm:"column:publisher_id" json:"publisher_id"`
 	Title         string         `gorm:"column:title" json:"title"`
 	Language      string         `gorm:"column:language" json:"language"`
 	Image         string         `gorm:"column:image" json:"image"`
@@ -26,7 +28,7 @@ type BookFilter struct {
 	MinRating int   `json:"min_rating"` //default value no filter: -1
 }
 
-type MovieResult struct {
+type BookResult struct {
 	Data []Book `json:"data"`
 	Paginator
 }

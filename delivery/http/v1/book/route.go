@@ -17,4 +17,5 @@ func Init(group *echo.Group, useCase *usecase.UseCase) {
 	group.POST("", r.Insert)
 	group.DELETE("/:id", r.Delete)
 	group.PUT("/:id", r.Update)
+	group.GET("",r.SearchBook)
 }

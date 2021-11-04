@@ -10,6 +10,8 @@ import (
 
 type InsertRequest struct {
 	Title         string    `json:"title"`
+	AuthorID      int64     `json:"author_id"`
+	PublisherID   int64     `json:"publisher_id"`
 	Language      string    `json:"language"`
 	Image         string    `json:"image"`
 	Description   string    `json:"description"`
@@ -21,6 +23,8 @@ type InsertRequest struct {
 func (u *Usecase) Insert(ctx context.Context, req InsertRequest) (*model.Book, error) {
 	book := &model.Book{
 		Title:         req.Title,
+		AuthorID:      req.AuthorID,
+		PublisherID:   req.PublisherID,
 		Image:         "https://media.istockphoto.com/photos/many-hardbound-books-background-selective-focus-picture-id1209683444?s=612x612",
 		Language:      req.Language,
 		Description:   req.Description,
