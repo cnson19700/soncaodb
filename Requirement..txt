@@ -4,16 +4,17 @@ Chung
 3. lấy danh sách theo category
 4. Lấy danh sách theo Rating
     vd: lấy sách hơn 3*
-5. lấy danh sách sách đã xem
-8. Lấy thông tin chi tiết(GetByID)
+
+
+7. Lấy thông tin chi tiết(GetByID)
     a) Các thông tin cơ bản
     b) Lấy trung bình Rating
     c) Số lượng người đã xem sách này
 
 
-6. Bình luận sách
-7. Rating sách
-9. Reply bình luận người khác
+5. Bình luận sách
+6. Rating sách
+8. Reply bình luận người khác
 
 
 

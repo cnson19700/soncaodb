@@ -93,9 +93,9 @@ func (r *pgRepository) SearchBook(ctx context.Context,
 	filterCate := ""
 	filterRate := ""
 
-	if filter.AuthorID != 0 {
-		filterAuthor = "JOIN book_authors ON book_authors.book_id = books.id AND book_authors.author_id = " + strconv.FormatInt(filter.AuthorID, 10)
-	}
+	// if filter.AuthorID != 0 {
+	// 	filterAuthor = "JOIN book_authors ON book_authors.book_id = books.id AND book_authors.author_id = " + strconv.FormatInt(filter.AuthorID, 10)
+	// }
 
 	if filter.CateID != 0 {
 		filterCate = "JOIN book_categories ON book_categories.book_id = books.id AND book_categories.category_id = " + strconv.FormatInt(filter.CateID, 10)

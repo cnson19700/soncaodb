@@ -8,9 +8,9 @@ import (
 	"github.com/soncaodb/config"
 	"github.com/soncaodb/delivery/http/v1/auth"
 	"github.com/soncaodb/delivery/http/v1/book"
+	"github.com/soncaodb/delivery/http/v1/comment"
 	"github.com/soncaodb/delivery/http/v1/user"
 
-	//"github.com/soncaodb/delivery/http/v1/comment"
 	//"github.com/soncaodb/delivery/http/v1/userfavorite"
 	"github.com/soncaodb/repository"
 	"github.com/soncaodb/usecase"
@@ -63,7 +63,7 @@ func NewHTTPHandler(repo *repository.Repository, ucase *usecase.UseCase) *echo.E
 	user.Init(apiV1.Group("/users"), ucase)
 	book.Init(apiV1.Group("/books"), ucase)
 	// userfavorite.Init(apiV1.Group("/favorites"), ucase)
-	// comment.Init(apiV1.Group("/comments"), ucase)
+	comment.Init(apiV1.Group("/comments"), ucase)
 
 	return e
 }

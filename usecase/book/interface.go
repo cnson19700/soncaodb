@@ -11,4 +11,5 @@ type IUsecase interface {
 	Delete(ctx context.Context, req DeleteBookRequest) error
 	Update(ctx context.Context, req UpdateBookRequest) (*model.Book, error)
 	SearchBook(ctx context.Context, searchText string, req SearchBookRequest) (*model.BookResult, error)
+	GetBook(ctx context.Context, req GetBookRequest) (*model.Book, error)
 }

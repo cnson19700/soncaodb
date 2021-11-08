@@ -4,13 +4,15 @@ import (
 	"context"
 
 	"github.com/soncaodb/repository/book"
+	"github.com/soncaodb/repository/comment"
 	"github.com/soncaodb/repository/user"
 	"gorm.io/gorm"
 )
 
 type Repository struct {
-	User user.Repository
-	Book book.Repository
+	User    user.Repository
+	Book    book.Repository
+	Comment comment.Repository
 }
 
 func New(
@@ -18,7 +20,8 @@ func New(
 	// getRedisClient func(ctx context.Context) *redis.Client,
 ) *Repository {
 	return &Repository{
-		User: user.NewPGRepository(getSQLClient),
-		Book: book.NewPGRepository(getSQLClient),
+		User:    user.NewPGRepository(getSQLClient),
+		Book:    book.NewPGRepository(getSQLClient),
+		Comment: comment.NewPGRepository(getSQLClient),
 	}
 }

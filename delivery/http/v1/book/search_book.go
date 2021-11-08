@@ -41,6 +41,8 @@ func (r *Route) SearchBook(c echo.Context) error {
 		},
 	}
 
+	//log.Fatal(req)
+
 	res, err := r.bookUseCase.SearchBook(ctx, searchText, req)
 	if err != nil {
 		_ = errors.As(err, &appError)
