@@ -2,6 +2,7 @@ package comment
 
 import (
 	"context"
+	"strings"
 
 	"github.com/pkg/errors"
 	"github.com/soncaodb/model"
@@ -65,4 +66,53 @@ func (r *pgRepository) Update(ctx context.Context, book *model.Comment) (*model.
 	err := db.Save(book).Error
 
 	return book, errors.Wrap(err, "update comment fail")
+}
+
+func (r *pgRepository) Find(
+	ctx context.Context,
+	conditions []model.Condition,
+	paginator *model.Paginator,
+	orders []string,
+) (*model.CommentResult, error) {
+	// Build query
+	db := r.getClient(ctx)
+	query := db.Model(&model.Comment{})
+
+	// Where
+	for _, condition := range conditions {
+		switch strings.ToLower(condition.Type) {
+		case model.ConditionTypeNot:
+			query.Not(condition.Pattern, condition.Values...)
+		case model.ConditionTypeOr:
+			query.Or(condition.Pattern, condition.Values...)
+		default:
+			query.Where(condition.Pattern, condition.Values...)
+		}
+	}
+
+	// Order
+	for _, order := range orders {
+		query.Order(order)
+	}
+
+	// Paging
+	var result model.CommentResult
+
+	if paginator.Limit >= 0 {
+		if paginator.Page <= 0 {
+			paginator.Page = 1
+		}
+
+		if paginator.Limit == 0 {
+			paginator.Limit = model.PageSize
+		}
+
+		result.Page = paginator.Page
+		result.Limit = paginator.Limit
+		query.Count(&result.Total).Scopes(paginator.Paginate())
+	}
+
+	err := query.Find(&result.Data).Error
+
+	return &result, err
 }

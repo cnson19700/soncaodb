@@ -17,4 +17,5 @@ func Init(group *echo.Group, useCase *usecase.UseCase) {
 	}
 	group.POST("", r.Insert)
 	group.DELETE("", r.Delete)
+	group.GET("", r.GetList)
 }

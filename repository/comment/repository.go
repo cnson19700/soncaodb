@@ -13,8 +13,10 @@ type Repository interface {
 	DeleteSubComment(ctx context.Context, parentID int64) error
 	Insert(ctx context.Context, comment *model.Comment) (*model.Comment, error)
 	Update(ctx context.Context, comment *model.Comment) (*model.Comment, error)
-	// SearchComment(ctx context.Context,
-	// 	page *model.Paginator,
-	// 	filter *model.CommentFilter,
-	// 	orders []string) (*model.CommentResult, error)
+	Find(
+		ctx context.Context,
+		conditions []model.Condition,
+		paginator *model.Paginator,
+		orders []string,
+	) (*model.CommentResult, error)
 }

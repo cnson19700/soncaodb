@@ -5,18 +5,11 @@ Chung
 4. Lấy danh sách theo Rating
     vd: lấy sách hơn 3*
 
-
 7. Lấy thông tin chi tiết(GetByID)
-    a) Các thông tin cơ bản
-    b) Lấy trung bình Rating
-    c) Số lượng người đã xem sách này
-
 
 5. Bình luận sách
 6. Rating sách
 8. Reply bình luận người khác
-
-
 
 
 User:

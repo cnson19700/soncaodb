@@ -93,12 +93,12 @@ func (r *pgRepository) SearchBook(ctx context.Context,
 	filterCate := ""
 	filterRate := ""
 
-	// if filter.AuthorID != 0 {
-	// 	filterAuthor = "JOIN book_authors ON book_authors.book_id = books.id AND book_authors.author_id = " + strconv.FormatInt(filter.AuthorID, 10)
-	// }
-
 	if filter.CateID != 0 {
-		filterCate = "JOIN book_categories ON book_categories.book_id = books.id AND book_categories.category_id = " + strconv.FormatInt(filter.CateID, 10)
+		filterCate = " JOIN book_categories ON book_categories.book_id = books.id AND book_categories.category_id = " + strconv.FormatInt(filter.CateID, 10)
+	}
+
+	if filter.AuthorID != 0 {
+		filterAuthor = "AND books.author_id = " + strconv.FormatInt(filter.AuthorID, 10)
 	}
 
 	if filter.MinRating != -1 {
@@ -110,11 +110,12 @@ func (r *pgRepository) SearchBook(ctx context.Context,
 	}
 
 	queryStr := "SELECT * FROM books" +
-		filterAuthor + " " +
 		filterCate + " WHERE isnull(books.deleted_at) " +
+		filterAuthor + " " +
 		filterRate + " " +
 		filterTitle
 
+	//log.Fatal(queryStr)
 	//Paging
 	var res model.BookResult
 

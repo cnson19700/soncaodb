@@ -23,7 +23,7 @@ func (r *Route) Delete(c echo.Context) error {
 		return utils.Response.Error(ctx, apperror.ErrInvalidInput(err))
 	}
 
-	err := r.commentUseCase.Delete(ctx, req)
+	err := r.commentUseCase.Delete(ctx, &req)
 
 	if err != nil {
 		_ = errors.As(err, &appError)
